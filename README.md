@@ -26,9 +26,9 @@ O projeto foi construído com foco em **performance (WebSockets)**, **escalabili
 | :---: | :---: |
 | ![Dashboard do Criador](assets/criandopergunta.png) | ![Respostas](assets/dashboard.png) |
 
-| Dashboard do Criador | Pódio Final |
-| :---: | :---: |
-| ![Jogador que respondeu pergunta](assets/respondido.png) | ![Podium](assets/podium.png) |
+| Pódio Final |
+| :---: |
+| ![Podium](assets/podium.png) |
 
 ---
 

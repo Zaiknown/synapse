@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Synapse</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+    <div class="background-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+    </div>
+
+    <nav id="home-navbar" class="glass-nav">
+        
+        <div class="nav-left">
+            <button id="btn-exit-room" class="btn-exit hidden" onclick="exitToHome()" title="Sair da Sala">⬅️</button>
+            <div class="nav-logo">⚡ SYNAPSE</div>
+        </div>
+
+        <div class="nav-right-container">
+            
+            <div id="game-header" class="hidden">
+                <div class="badge-server">SERVER: <span id="container-id">{{ container_id }}</span></div>
+                <div class="status-badge">SALA: <span id="display-room-name" style="margin-left:5px; color:#fff;">...</span></div>
+                
+                <div id="badge-code-container" class="status-badge hidden">CÓD: <span id="display-real-code" style="margin-left:5px; font-weight:bold;">---</span></div>
+                <div class="status-badge">⭐ <span id="my-score" style="margin-left:5px; color:#ffcc00;">0</span></div>
+                <div id="active-players-badge" class="status-badge">👤 <span id="online-count" style="margin-left:5px;">0</span></div>
+            </div>
+
+            <div class="nav-links">
+                <a href="#" onclick="openModal('modal-how')">Como Jogar</a>
+                <a href="#" onclick="openModal('modal-about')">Sobre</a>
+                <button id="btn-sound-toggle" onclick="toggleMute()" class="nav-btn-sound">🔊</button>
+            </div>
+
+        </div>
+    </nav>
+
+    <div class="main-wrapper">
+        
+        <div id="screen-home" class="screen-home-container">
+            <div class="home-grid">
+                <div class="hero-content">
+                    <h1 class="hero-title">SYNAPSE</h1>
+                    <p class="hero-subtitle">O Desafio de Trivia Multiplayer em Tempo Real</p>
+                    <ul class="hero-features">
+                        <li>🚀 <strong>Rápido:</strong> Crie uma sala e jogue em segundos.</li>
+                        <li>🌍 <strong>Global:</strong> Perguntas sobre Animes, Games e mais.</li>
+                    </ul>
+                    <div class="hero-footer-text">
+                        v1.0.0 Alpha • Desenvolvido por <strong>Matheus</strong>
+                    </div>
+                </div>
+        
+                <div class="action-card-wrapper">
+                    <div class="glass-card home-card">
+                        <h2>Bem-vindo</h2>
+                        <input type="text" id="nickname-input" placeholder="SEU NICKNAME" maxlength="12" autocomplete="off" style="text-align:center; font-weight:bold; letter-spacing:1px; margin-bottom: 20px;">
+                        
+                        <div class="rooms-section">
+                            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:5px;">
+                                <span style="font-size:0.8rem; font-weight:bold; color:#00ffcc;">🌐 SALAS DISPONÍVEIS</span>
+                            </div>
+                            <div id="public-rooms-list" class="rooms-list"></div>
+                            <div id="public-rooms-container" class="hidden" style="padding:15px; opacity:0.6; font-size:0.8rem;">
+                            </div>
+                        </div>
+        
+                        <div class="divider-text"><span>OU CRIE A SUA</span></div>
+        
+                        <div class="create-form">
+                            <input type="text" id="input-room-name" placeholder="NOME DA SALA" maxlength="15">
+                                <div class="flex-row">
+                                    <div class="flex-col">
+                                        <label>CICLOS</label>
+                                        <input type="number" id="input-cycles" value="1" min="1" max="20" placeholder="1">
+                                    </div>
+                                    <div class="flex-col">
+                                        <label>PLAYERS</label>
+                                        <input type="number" id="input-max-players" value="4" min="2" max="50" placeholder="4">
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="text-align: left; margin-top:10px;">
+                                <label style="font-size: 0.8rem; cursor: pointer; display:flex; align-items:center; gap:5px;">
+                                    <input type="checkbox" id="input-private" style="width:auto; margin:0;"> Privada? 🔒
+                                </label>
+                            </div>
+                            <button class="btn-primary glow-btn" onclick="createRoom()" style="margin-top:15px;">CRIAR SALA 🔥</button>
+                        </div>
+        
+                        <div style="margin-top: 15px; display:flex; gap:5px;">
+                            <input type="text" id="room-code-input" placeholder="CÓDIGO" style="text-transform:uppercase; text-align:center; width: 40%; margin:0;">
+                            <button class="btn-action" style="margin:0; width: 60%;" onclick="enterRoom()">ENTRAR 🔍</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% include 'components/lobby.html' %}
+        {% include 'components/creator.html' %}
+        {% include 'components/waiting.html' %}
+        {% include 'components/answering.html' %}
+        {% include 'components/dashboard.html' %}
+        {% include 'components/podium.html' %}
+
+        <div id="game-chat" class="chat-container hidden">
+            <div class="chat-header">
+                <span>💬 Bate-papo</span>
+                <span id="chat-toggle-icon">▼</span>
+            </div>
+            <div id="chat-messages" class="chat-messages">
+                <div class="chat-msg system">Bem-vindo ao chat da sala!</div>
+            </div>
+            <div class="chat-input-area">
+                <input type="text" id="chat-input" placeholder="Mensagem..." maxlength="100" onkeypress="handleChatKey(event)">
+                <button onclick="sendChatMessage()">➤</button>
+            </div>
+        </div>
+
+        <div id="feedback-overlay" class="feedback-overlay hidden">
+            <div class="feedback-content">
+                <div id="feedback-icon" style="font-size: 4rem; margin-bottom: 10px;"></div>
+                <h2 id="feedback-title" style="font-size: 2rem; margin: 0;"></h2>
+                <p id="feedback-subtitle" style="font-size: 1.2rem; opacity: 0.8;"></p>
+            </div>
+        </div>
+    </div>
+
+    <footer id="home-footer" class="glass-footer">
+        <p>Desenvolvido por <strong>Matheus</strong> | v1.0.0 Alpha</p>
+    </footer>
+
+    <div id="modal-how" class="modal hidden"> <div class="modal-content glass-card"> <span class="close-modal" onclick="closeModal('modal-how')">&times;</span> <h2>📖 Como Jogar</h2> <ul style="text-align: left; margin-top: 15px; line-height: 1.6;"> <li>1. <strong>Crie uma sala</strong> ou entre em uma existente.</li> <li>2. <strong>O Mestre da Rodada</strong> gera uma pergunta ele mesmo ou usando IA.</li> <li>3. <strong>Todos respondem</strong> o mais rápido possível!</li> <li>4. Quem fizer mais pontos vence. Em caso de empate, vence quem acertou mais!</li> </ul> </div> </div>
+    <div id="modal-about" class="modal hidden"> <div class="modal-content glass-card"> <span class="close-modal" onclick="closeModal('modal-about')">&times;</span> <h2>⚡ Sobre o SYNAPSE</h2> <p style="margin-top: 15px;"> Um projeto de trivia multiplayer escalável usando <strong>Docker Swarm</strong>, <strong>FastAPI</strong>, <strong>Redis</strong> e <strong>Deep Translator</strong>. </p> <p style="margin-top: 10px; font-size: 0.9rem; opacity: 0.7;"> Feito com 💜 e muito café. </p> </div> </div>
+
+    <script src="/static/script.js"></script>
+    <script>
+        function openModal(id) { document.getElementById(id).classList.remove('hidden'); }
+        function closeModal(id) { document.getElementById(id).classList.add('hidden'); }
+    </script>
+</body>
+</html>

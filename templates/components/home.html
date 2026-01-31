@@ -1,0 +1,85 @@
+<div id="screen-home" class="screen-home-container">
+    
+    <div class="home-grid">
+        
+        <div class="hero-content">
+            <h1 class="hero-title">SYNAPSE</h1>
+            <p class="hero-subtitle">O Desafio de Trivia Multiplayer em Tempo Real</p>
+            
+            <ul class="hero-features">
+                <li>🚀 <strong>Rápido:</strong> Crie uma sala e jogue em segundos.</li>
+                <li>🌍 <strong>Global:</strong> Perguntas sobre Animes, Games e mais.</li>
+                <li>🏆 <strong>Competitivo:</strong> Suba no ranking e vença seus amigos.</li>
+            </ul>
+
+            <div class="hero-footer-text">
+                v1.0.0 Alpha • Desenvolvido por <strong>Matheus</strong>
+            </div>
+        </div>
+
+        <div class="action-card-wrapper">
+            <div class="glass-card home-card">
+                <h2>Bem-vindo</h2>
+                
+                <input type="text" id="nickname-input" placeholder="SEU NICKNAME" maxlength="12" autocomplete="off" style="text-align:center; font-weight:bold; letter-spacing:1px;">
+
+                <div class="rooms-section">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:5px;">
+                        <span style="font-size:0.8rem; font-weight:bold; color:#00ffcc;">🌐 SALAS DISPONÍVEIS</span>
+                        <span style="font-size:0.7rem; opacity:0.6;">Ao vivo</span>
+                    </div>
+                    
+                    <div id="public-rooms-list" class="rooms-list">
+                        </div>
+                    
+                    <div id="public-rooms-container" class="hidden" style="padding:15px; opacity:0.6; font-size:0.8rem;">
+                        Nenhuma sala pública no momento.
+                    </div>
+                </div>
+
+                <div class="divider-text"><span>OU CRIE A SUA</span></div>
+
+                <div class="create-form">
+                    <input type="text" id="input-room-name" placeholder="NOME DA SALA (Ex: Quiz Anime)" maxlength="15">
+                    
+                    <div class="flex-row">
+                        <div class="flex-col">
+                            <label>CICLOS</label>
+                            <select id="input-cycles">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="5">5</option>
+                            </select>
+                        </div>
+                        <div class="flex-col">
+                            <label>PLAYERS</label>
+                            <select id="input-max-players">
+                                <option value="2">2</option>
+                                <option value="4" selected>4</option>
+                                <option value="8">8</option>
+                                <option value="16">16</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="flex-row checkbox-row">
+                        <label class="custom-checkbox">
+                            <input type="checkbox" id="input-private">
+                            <span class="checkmark"></span>
+                            Privada? 🔒
+                        </label>
+                    </div>
+
+                    <button class="btn-primary glow-btn" onclick="createRoom()">CRIAR SALA 🔥</button>
+                </div>
+
+                <div style="margin-top: 15px; display:flex; gap:5px;">
+                    <input type="text" id="room-code-input" placeholder="CÓDIGO" style="text-transform:uppercase; text-align:center; width: 40%;">
+                    <button class="btn-action" style="margin:0; width: 60%;" onclick="enterRoom()">ENTRAR 🔍</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

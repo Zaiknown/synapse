@@ -1,0 +1,49 @@
+<div id="screen-creator" class="glass-card hidden">
+    <div class="status-badge">👑 SUA VEZ DE CRIAR</div>
+    
+    <div id="creator-timer-container" style="width: 100%; height: 8px; background: rgba(255,255,255,0.1); border-radius: 4px; margin: 15px 0 10px 0; overflow: hidden; border: 1px solid rgba(255,255,255,0.1);">
+        <div id="creator-progress-bar" style="width: 100%; height: 100%; background: #00ffcc; transition: width 1s linear; box-shadow: 0 0 10px #00ffcc;"></div>
+    </div>
+
+    <div style="font-size: 0.8rem; opacity: 0.8; margin-bottom: 10px;">
+        Tentativas Restantes: <span id="reroll-counter-val" style="font-weight: bold; color: #ffcc00;">5</span>/5
+    </div>
+
+    <select id="input-category" class="opt-input" style="margin-bottom: 10px; background: rgba(0,0,0,0.4); border-color: #bd00ff;">
+        <option value="any">🎲 Aleatório (Qualquer)</option>
+        <option value="animes">🏯 Animes & Mangás</option>
+        <option value="games">🎮 Video Games</option>
+        <option value="filmes">🎬 Filmes</option>
+        <option value="computadores">💻 Computadores</option>
+        <option value="ciencias">🔬 Ciências & Natureza</option>
+        <option value="historia">📜 História</option>
+        <option value="geografia">🌍 Geografia</option>
+        <option value="matematica">📐 Matemática</option>
+        <option value="geral">🧠 Conhecimentos Gerais</option>
+    </select>
+
+    <button onclick="askForTrivia()" class="btn-primary" style="margin-bottom: 15px; background: linear-gradient(45deg, #8e2de2, #4a00e0);">
+        🎲 GERAR PERGUNTA ALEATÓRIA
+    </button>
+
+    <input type="text" id="input-question" placeholder="Escreva a pergunta..." autocomplete="off">
+    
+    <div class="grid-inputs">
+        <input type="text" id="input-opt-0" class="opt-input red" placeholder="Resp. Vermelha" autocomplete="off">
+        <input type="text" id="input-opt-1" class="opt-input blue" placeholder="Resp. Azul" autocomplete="off">
+        <input type="text" id="input-opt-2" class="opt-input yellow" placeholder="Resp. Amarela" autocomplete="off">
+        <input type="text" id="input-opt-3" class="opt-input green" placeholder="Resp. Verde" autocomplete="off">
+    </div>
+
+    <h3 style="margin-top: 10px; font-size: 0.9rem;">Qual a correta?</h3>
+    <select id="input-correct">
+        <option value="0">Vermelha</option>
+        <option value="1">Azul</option>
+        <option value="2">Amarela</option>
+        <option value="3">Verde</option>
+    </select>
+
+    <button onclick="submitQuestion()" class="btn-action">
+        ENVIAR PERGUNTA 🚀
+    </button>
+</div>
